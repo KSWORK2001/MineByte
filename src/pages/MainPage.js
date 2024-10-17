@@ -1,10 +1,10 @@
-// MainPage.js
 import React from 'react';
-import './MainPage.css'; // Assuming you are styling it separately
+import './MainPage.css';
 
-const MainPage = () => (
+const MainPage = ({ username }) => (
   <div className="main-page">
     <div className="left-section">
+      <h2>Welcome, {username}!</h2> {/* Display the username */}
       <div className="progress">Progress</div>
       <div className="stats">Stats</div>
     </div>
