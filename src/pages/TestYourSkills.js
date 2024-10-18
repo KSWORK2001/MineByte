@@ -3,7 +3,7 @@ import React from 'react';
 
 const TestYourSkills = () => (
   <div className="skills-selection">
-    <h2>Select a language to test your skills</h2>
+    <h2 style={{ marginTop: '50px' }}>Select a language to test your skills</h2>
     <div className="language-options">
       <button>C++</button>
       <button>Java</button>
