@@ -7,7 +7,7 @@ const accomplishments = [
 ];
 
 const Accomplishments = () => (
-  <div className="accomplishments">
+  <div className="accomplishments"style={{ marginTop: '50px' }}>
     {accomplishments.map((accomplishment, index) => (
       <div key={index} className="accomplishment">
         {accomplishment.language}: {accomplishment.certificate}
