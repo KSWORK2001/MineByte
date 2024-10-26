@@ -11,31 +11,25 @@
 /* Prevent horizontal overflow on small screens */
 html, body {
   overflow-x: hidden;
-  height: 100%;
-}
-
-/* Full page flexbox layout */
-.register-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* Center the form vertically */
-  align-items: center; /* Center the form horizontally */
-  height: 100vh; /* Full viewport height */
 }
 
 /* Header styling */
 .header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 50px;
   background-color: #6B73E8;
   font-family: 'Antonio', sans-serif;
   color: #D7D9CE;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
 }
 
 .brand {
@@ -48,6 +42,7 @@ html, body {
 .nav-links {
   display: flex;
   gap: 25px;
+  align-items: center;
 }
 
 .nav-links a {
@@ -60,6 +55,26 @@ html, body {
   color: #FFFFFF;
 }
 
+/* Responsive header adjustments */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 20px;
+  }
+  .nav-links {
+    gap: 10px;
+  }
+}
+
+/* Register page layout */
+.register-page {
+  padding-top: 80px; /* To account for the fixed header */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px); /* Adjust height considering the fixed header */
+  background-color: #f9f9f9;
+}
+
 /* Register form container */
 .register-container {
   max-width: 400px;
@@ -68,7 +83,6 @@ html, body {
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  margin-top: 80px; /* Add space between the form and the header */
 }
 
 /* Title styling for the register form */
@@ -76,14 +90,13 @@ html, body {
   font-size: 28px;
   font-weight: 600;
   color: #333;
+  text-align: center;
   margin-bottom: 20px;
-  text-align: left; /* Align title to the left */
 }
 
 /* Form group for each input field */
 .form-group {
   margin-bottom: 1rem;
-  text-align: left; /* Align the form labels and input fields to the left */
 }
 
 /* Label styling for input fields */
@@ -101,7 +114,6 @@ html, body {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  text-align: left; /* Ensure text input starts from the left */
 }
 
 /* Button for the register action */
@@ -114,19 +126,10 @@ html, body {
   border-radius: 5px;
   cursor: pointer;
   width: 100%;
-  text-align: center;
 }
 
 .register-button:hover {
   background-color: #45a049;
-}
-
-/* Success message styling */
-.success-message {
-  color: #28a745;
-  font-size: 14px;
-  margin-bottom: 10px;
-  text-align: left;
 }
 
 /* Error message styling */
@@ -134,27 +137,5 @@ html, body {
   color: #d9534f;
   font-size: 14px;
   margin-bottom: 10px;
-  text-align: left;
-}
-
-/* Login section below the form */
-.login-section {
-  margin-top: 20px;
-  text-align: left;
-}
-
-.login-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
   text-align: center;
-}
-
-.login-button:hover {
-  background-color: #0056b3;
 }
