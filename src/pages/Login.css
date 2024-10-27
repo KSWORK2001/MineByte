@@ -1,37 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100..700&display=swap');
 
-/* Universal box-sizing for better layout management */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Prevent horizontal overflow on small screens */
 html, body {
   overflow-x: hidden;
   height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f0f2f5; /* Soft background color */
 }
 
 /* Full page flexbox layout */
-.register-page {
+.login-page {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center the form vertically */
-  align-items: center; /* Center the form horizontally */
-  height: 100vh; /* Full viewport height */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 /* Header styling */
 .header {
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  padding: 10px 50px;
+  width: 100%;
+  padding: 15px 50px;
   background-color: #6B73E8;
-  font-family: 'Antonio', sans-serif;
   color: #D7D9CE;
   display: flex;
   justify-content: space-between;
@@ -40,19 +38,20 @@ html, body {
 
 .brand {
   font-family: 'Pacifico', cursive;
-  font-size: 28px;
-  color: #D7D9CE;
+  font-size: 30px;
+  color: #fff;
   text-decoration: none;
 }
 
 .nav-links {
   display: flex;
-  gap: 25px;
+  gap: 20px;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: rgba(215, 217, 206, 0.7);
+  color: rgba(215, 217, 206, 0.9);
+  font-size: 16px;
   transition: color 0.3s ease;
 }
 
@@ -60,36 +59,45 @@ html, body {
   color: #FFFFFF;
 }
 
-/* Register form container */
-.register-container {
+/* Login form container */
+.login-container {
   max-width: 400px;
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  margin-top: 80px; /* Add space between the form and the header */
+  width: 90%;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 80px;
 }
 
-/* Title styling for the register form */
-.register-title {
-  font-size: 28px;
-  font-weight: 600;
+/* Title styling for the login form */
+.login-title {
+  font-size: 32px;
+  font-weight: bold;
   color: #333;
   margin-bottom: 20px;
-  text-align: left; /* Align title to the left */
+  font-family: 'Antonio', sans-serif;
+}
+
+/* Error message styling */
+.error-message {
+  color: #d9534f;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
 }
 
 /* Form group for each input field */
 .form-group {
-  margin-bottom: 1rem;
-  text-align: left; /* Align the form labels and input fields to the left */
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 /* Label styling for input fields */
 .form-label {
   display: block;
-  margin-bottom: 0.5rem;
+  margin-bottom: 5px;
   font-size: 14px;
   color: #555;
 }
@@ -97,64 +105,47 @@ html, body {
 /* Input field styling */
 .form-input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-  text-align: left; /* Ensure text input starts from the left */
+  font-size: 16px;
+  transition: border 0.3s ease;
 }
 
-/* Button for the register action */
-.register-button {
-  background-color: #4CAF50;
-  color: white;
+.form-input:focus {
+  border-color: #6B73E8;
+  outline: none;
+}
+
+/* Button styling */
+.login-button, .signup-button {
+  background-color: #6B73E8;
+  color: #ffffff;
   border: none;
-  padding: 12px 20px;
+  padding: 12px;
   font-size: 16px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   width: 100%;
-  text-align: center;
+  transition: background-color 0.3s ease;
 }
 
-.register-button:hover {
-  background-color: #45a049;
+.login-button:hover, .signup-button:hover {
+  background-color: #5a63d0;
 }
 
-/* Success message styling */
-.success-message {
-  color: #28a745;
-  font-size: 14px;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-/* Error message styling */
-.error-message {
-  color: #d9534f;
-  font-size: 14px;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-/* Login section below the form */
-.login-section {
+.signup-section {
   margin-top: 20px;
-  text-align: left;
+  font-size: 14px;
+  color: #555;
 }
 
-.login-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 100%;
-  text-align: center;
+.signup-button {
+  margin-top: 10px;
+  background-color: #4CAF50;
 }
 
-.login-button:hover {
-  background-color: #0056b3;
+.signup-button:hover {
+  background-color: #45a049;
 }
