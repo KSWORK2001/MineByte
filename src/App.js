@@ -77,37 +77,42 @@ const App = () => {
   }
 
   return (
-    <Router>
-      {isLoggedIn ? (
-        <Layout username={username}>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <MainPage
-                  username={username}
-                  firstName={firstName}
-                  lastName={lastName}
-                />
-              }
-            />
-            <Route path="/courses" element={<CourseSelection />} />
-            <Route path="/test-your-skills" element={<TestYourSkills />} />
-            <Route path="/accomplishments" element={<Accomplishments />} />
-            <Route path="/quizlet" element={<QuizletPage />} />
-          </Routes>
-        </Layout>
-      ) : (
+      <Router>
         <Routes>
-          <Route path="/" element={<Login onLogin={handleLogin} />} />
-          <Route
-            path="/register"
-            element={<Register onLogin={handleLogin} />}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* Public routes */}
+          <Route path="/About" element={<About />} />
+          <Route path="/Contact" element={<Contact />} />
+
+          {/* Protected routes that require login */}
+          {isLoggedIn ? (
+              <>
+                <Route element={<Layout username={username} />}>
+                  <Route
+                      path="/"
+                      element={
+                        <MainPage
+                            username={username}
+                            firstName={firstName}
+                            lastName={lastName}
+                        />
+                      }
+                  />
+                  <Route path="/courses" element={<CourseSelection />} />
+                  <Route path="/test-your-skills" element={<TestYourSkills />} />
+                  <Route path="/accomplishments" element={<Accomplishments />} />
+                  <Route path="/quizlet" element={<QuizletPage />} />
+                </Route>
+              </>
+          ) : (
+              <>
+                <Route path="/" element={<Login onLogin={handleLogin} />} />
+                <Route path="/register" element={<Register onLogin={handleLogin} />} />
+                <Route path="*" element={<Navigate to="/" />} />
+              </>
+          )}
         </Routes>
-      )}
-    </Router>
+      </Router>
+
   );
 };
 

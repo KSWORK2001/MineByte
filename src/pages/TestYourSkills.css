@@ -1,56 +1,156 @@
-/* TestYourSkills.css */
 .skills-selection {
-    margin: 50px auto;
-    text-align: center;
-  }
-  
-  .language-options button {
-    margin: 10px;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    background-color: #3498db;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .language-options button:hover {
-    background-color: #2980b9;
-  }
-  
-  .compiler-container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    margin: 20px;
-  }
-  
-  .compiler {
-    flex: 0.65;
-    padding: 20px;
-    border: 1px solid #ddd;
-    background-color: #f5f5f5;
-  }
-  
-  .questions {
-    flex: 0.35;
-    padding: 20px;
-    border-left: 1px solid #ddd;
-  }
-  
-  .question-item {
-    margin-bottom: 15px;
-  }
-  
-  .dialog-message {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .dialog-buttons {
-    display: flex;
-    justify-content: space-around;
-  }
-  
+  margin: 50px auto;
+  text-align: center;
+}
+
+.language-options button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.language-options button:hover {
+  background-color: #2980b9;
+}
+
+.gen-or-task button {
+  margin: 15px;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.gen-or-task button:hover {
+  background-color: #2980b9;
+}
+
+.alt-options button {
+  margin: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.alt-options button:hover {
+  background-color: #2980b9;
+}
+
+.compiler-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px;
+}
+
+.compiler-container button {
+  margin: 5px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+.compiler-container button:hover {
+  background-color: #2980b9;
+}
+
+.compiler {
+  flex: 0.65;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f5f5f5;
+}
+
+.questions {
+  flex: 0.35;
+  padding: 20px;
+  border-left: 0px solid #ddd;
+}
+
+.question-item {
+  margin-bottom: 15px;
+}
+
+.dialog-message {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.dialog-buttons {
+  display: flex; /* Use flexbox to layout buttons horizontally */
+  justify-content: space-between; /* Space buttons evenly */
+  margin: 5px;
+  padding: 5px; /* Remove padding for the container */
+}
+
+.dialog-buttons button {
+  padding: 5px 10px;
+  font-size: 15px;
+  cursor: pointer;
+  background-color: #2e83bc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.dialog-buttons button:hover {
+  background-color: #237a9d; /* Change background on hover */
+}
+
+.leave-test-button {
+  display: block;
+  margin: 20px auto; /* Centers the button horizontally */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.leave-test-button:hover {
+  background-color: #2980b9;
+}
+
+textarea {
+  width: 100%;
+  height: 200px; /* Adjust the height as needed */
+  padding: 10px;
+  margin-top: 10px; /* Space between textarea and its label */
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px; /* Adjust font size */
+  resize: none; /* Disable resizing */
+}
+
+textarea:focus {
+  outline: none; /* Remove default focus outline */
+  border: 1px solid #3498db; /* Highlight border color */
+}
+
+.output {
+  margin-top: 10px; /* Space between output section and code */
+  padding: 10px;
+  background-color: #f0f8ff; /* Light background for output */
+  border: 1px solid #3498db; /* Border color for output section */
+  border-radius: 5px;
+}

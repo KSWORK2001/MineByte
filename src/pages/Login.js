@@ -1,9 +1,10 @@
+// Login.js
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.css"; // Import the updated CSS
+import { useNavigate, Link } from "react-router-dom";
+import "./Login.css";
 import { auth } from "../firebase/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import Cookies from "js-cookie"; // Import js-cookie
+import Cookies from "js-cookie";
 
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -38,12 +39,11 @@ const Login = ({ onLogin }) => {
 
   return (
     <div className="login-page">
-      {/* Header with "MineByte" brand name and navigation links */}
       <header className="header">
         <a href="/" className="brand">MineByte</a>
         <nav className="nav-links">
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
       </header>
 
@@ -73,15 +73,11 @@ const Login = ({ onLogin }) => {
               required
             />
           </div>
-          <button type="submit" className="login-button">
-            Login
-          </button>
+          <button type="submit" className="login-button">Login</button>
         </form>
         <div className="signup-section">
           <p>Don't have an account?</p>
-          <button className="signup-button" onClick={handleSignUp}>
-            Sign Up
-          </button>
+          <button className="signup-button" onClick={handleSignUp}>Sign Up</button>
         </div>
       </div>
     </div>

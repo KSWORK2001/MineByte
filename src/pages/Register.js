@@ -1,6 +1,7 @@
+// Register.js
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Register.css"; // Import the updated CSS
+import { useNavigate, Link } from "react-router-dom";
+import "./Register.css";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
 import { setDoc, doc } from "firebase/firestore";
@@ -12,13 +13,13 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState(""); // Success message state
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
-    setSuccessMessage(""); // Clear previous success messages
+    setSuccessMessage("");
 
     if (password !== confirmPassword) {
       setError("Passwords do not match");
@@ -29,56 +30,41 @@ const Register = () => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const { uid } = userCredential.user;
 
-      // Save the user's data to Firestore
       await setDoc(doc(db, "users", uid), {
         firstName,
         lastName,
         email,
       });
 
-      setSuccessMessage("Account created successfully! You can now login."); // Set success message
-
-      // Clear form fields after successful registration
+      setSuccessMessage("Account created successfully! You can now login.");
       setFirstName("");
       setLastName("");
       setEmail("");
       setPassword("");
       setConfirmPassword("");
     } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        setError("This email is already registered.");
-      } else if (error.code === "auth/weak-password") {
-        setError("Password should be at least 6 characters.");
-      } else if (error.code === "auth/invalid-email") {
-        setError("The email address is not valid.");
-      } else {
-        setError(error.message);
-      }
+      setError("There was an error creating your account. Please try again.");
     }
   };
 
   const handleLogin = () => {
-    navigate("/login"); // Navigate to the login page
+    navigate("/login");
   };
 
   return (
     <div className="register-page">
-      {/* Header with "MineByte" brand name and navigation links */}
       <header className="header">
         <a href="/" className="brand">MineByte</a>
         <nav className="nav-links">
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
+          <Link to="/about">About</Link>
+          <Link to="/contact">Contact</Link>
         </nav>
       </header>
 
-      {/* Main content for registration form */}
       <div className="register-container">
         <h2 className="register-title">Sign Up</h2>
-
         {error && <p className="error-message">{error}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>} {/* Display success message */}
-
+        {successMessage && <p className="success-message">{successMessage}</p>}
         <form onSubmit={handleRegister}>
           <div className="form-group">
             <label className="form-label">First Name</label>
@@ -135,16 +121,11 @@ const Register = () => {
               required
             />
           </div>
-          <button type="submit" className="register-button">
-            Register
-          </button>
+          <button type="submit" className="register-button">Register</button>
         </form>
-
         <div className="login-section">
           <p>Already have an account?</p>
-          <button className="login-button" onClick={handleLogin}>
-            Login
-          </button>
+          <button className="login-button" onClick={handleLogin}>Login</button>
         </div>
       </div>
     </div>
