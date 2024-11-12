@@ -26,6 +26,25 @@ const CourseDetails = () => {
 
   if (!course) return <Typography>Loading...</Typography>;
 
+  // Links to add to each course
+  const usefulLinks = {
+    Python: [
+      "https://www.w3schools.com/python/python_intro.asp",
+      "https://www.w3schools.com/python/python_getstarted.asp",
+      "https://www.w3schools.com/python/python_syntax.asp",
+      "https://www.w3schools.com/python/python_comments.asp",
+    ],
+    HTML: [
+      "https://www.w3schools.com/html/html_intro.asp",
+      "https://www.w3schools.com/html/html_editors.asp",
+      "https://www.w3schools.com/html/html_basic.asp",
+      "https://www.w3schools.com/html/html_elements.asp",
+    ],
+  };
+
+  // Get the course-specific links
+  const links = usefulLinks[courseName] || [];
+
   return (
     <Box sx={{ padding: "20px" }}>
       <Paper
@@ -53,6 +72,29 @@ const CourseDetails = () => {
         <Typography variant="body1">
           {course.isFree ? "Free" : "Paid"}
         </Typography>
+
+        {/* Displaying the useful links */}
+        {links.length > 0 && (
+          <>
+            <Typography variant="h6" mt={3}>
+              Useful Links:
+            </Typography>
+            <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+              {links.map((link, index) => (
+                <Button
+                  key={index}
+                  variant="contained"
+                  color="primary"
+                  href={link}
+                  target="_blank"
+                >
+                  {`Link ${index + 1}`}
+                </Button>
+              ))}
+            </Box>
+          </>
+        )}
+
         <Box
           width="100%"
           display="flex"

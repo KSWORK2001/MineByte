@@ -1,0 +1,78 @@
+.contact-page {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .contact-header {
+    background: linear-gradient(90deg, #6B73E8, #000);
+    color: white;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .contact-header .brand {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .nav-links a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  .contact-content {
+    padding: 40px;
+    text-align: center;
+  }
+  
+  .content-block {
+    background-color: white;
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1, h2, h3 {
+    color: #333;
+  }
+  
+  p {
+    color: #555;
+  }
+  
+  .contact-info {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  
+  .info-block {
+    background: white;
+    padding: 20px;
+    width: 45%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .info-block h3 {
+    color: #333;
+  }
+  
+  .back-to-login {
+    background-color: #6B73E8;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    margin-top: 30px;
+    cursor: pointer;
+  }
+  
+  .back-to-login:hover {
+    background-color: #5a66d1;
+  }
+  
