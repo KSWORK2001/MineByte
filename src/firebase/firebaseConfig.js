@@ -10,7 +10,7 @@ const firebaseConfig = {
   storageBucket: "minebyte-16438.firebasestorage.app",
   messagingSenderId: "572660599247",
   appId: "1:572660599247:web:7a41f1929cd0766d6e2aba",
-  measurementId: "G-C3XD68XYHB"
+  measurementId: "G-C3XD68XYHB",
 };
 
 // Initialize Firebase
@@ -19,5 +19,3 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 export { auth, db, collection, addDoc };
-
-

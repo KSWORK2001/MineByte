@@ -1,14 +1,26 @@
-// CourseDetails.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebase/firebaseConfig";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  arrayUnion,
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  setDoc,
+  updateDoc,
+  query,
+  where,
+} from "firebase/firestore";
 import { Box, Typography, Paper, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { useAuth } from "../contexts/AuthProvider";
 
 const CourseDetails = () => {
   const { courseName } = useParams();
   const [course, setCourse] = useState(null);
+  const [isEnrolled, setIsEnrolled] = useState(false);
+  const { user } = useAuth();
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -24,26 +36,61 @@ const CourseDetails = () => {
     fetchCourse();
   }, [courseName]);
 
-  if (!course) return <Typography>Loading...</Typography>;
+  console.log(user, "useruser");
 
-  // Links to add to each course
-  const usefulLinks = {
-    Python: [
-      "https://www.w3schools.com/python/python_intro.asp",
-      "https://www.w3schools.com/python/python_getstarted.asp",
-      "https://www.w3schools.com/python/python_syntax.asp",
-      "https://www.w3schools.com/python/python_comments.asp",
-    ],
-    HTML: [
-      "https://www.w3schools.com/html/html_intro.asp",
-      "https://www.w3schools.com/html/html_editors.asp",
-      "https://www.w3schools.com/html/html_basic.asp",
-      "https://www.w3schools.com/html/html_elements.asp",
-    ],
+  useEffect(() => {
+    // Check if the user is already enrolled in the course
+    const checkEnrollment = async () => {
+      if (user && course) {
+        const userDocRef = doc(db, "users", user.uid);
+        const userSnapshot = await getDoc(userDocRef);
+        if (userSnapshot.exists()) {
+          const userData = userSnapshot.data();
+          const enrolledCourses = userData.courses || [];
+          console.log(enrolledCourses, "enrolledCoursesenrolledCourses");
+
+          setIsEnrolled(
+            enrolledCourses.some((c) => c.title === course.courseName)
+          );
+        }
+      }
+    };
+
+    checkEnrollment();
+  }, [user, course]);
+
+  const handleEnroll = async () => {
+    try {
+      if (!user) {
+        console.error("User is not logged in.");
+        return;
+      }
+
+      const courseData = {
+        title: course.courseName,
+        description: course.description,
+        learningHours: course.learningHours,
+      };
+
+      const userDocRef = doc(db, "users", user.uid);
+
+      // Ensure the document exists or create it if not
+      await setDoc(
+        userDocRef,
+        { courses: arrayUnion(courseData) },
+        { merge: true }
+      );
+
+      console.log("Course added successfully!");
+      setIsEnrolled(true);
+    } catch (error) {
+      console.error("Error enrolling in course: ", error);
+    }
   };
 
-  // Get the course-specific links
-  const links = usefulLinks[courseName] || [];
+  console.log(course, "coursecourse");
+
+  if (!course) return <Typography>Loading...</Typography>;
 
   return (
     <Box sx={{ padding: "20px" }}>
@@ -69,47 +116,59 @@ const CourseDetails = () => {
         <Typography variant="subtitle1" color="textSecondary">
           Enrollment:
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" paragraph>
           {course.isFree ? "Free" : "Paid"}
         </Typography>
 
-        {/* Displaying the useful links */}
-        {links.length > 0 && (
-          <>
-            <Typography variant="h6" mt={3}>
-              Useful Links:
+        {course.videoLink && isEnrolled && (
+          <Box mt={3} textAlign="center">
+            <Typography variant="subtitle1" color="textSecondary" gutterBottom>
+              Course Video:
             </Typography>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {links.map((link, index) => (
-                <Button
-                  key={index}
-                  variant="contained"
-                  color="primary"
-                  href={link}
-                  target="_blank"
-                >
-                  {`Link ${index + 1}`}
-                </Button>
-              ))}
-            </Box>
-          </>
+            <Box
+              component="iframe"
+              src={
+                // Extract the src URL from the videoLink string using a regex
+                course.videoLink.match(/src="([^"]*)"/)?.[1] || ""
+              }
+              width="100%"
+              height="315"
+              allow="autoplay; encrypted-media"
+              allowFullScreen
+              sx={{ borderRadius: "8px", border: "none" }}
+            />
+          </Box>
         )}
 
-        <Box
-          width="100%"
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          py={2}
-        >
-          <Button
-            startIcon={<AddIcon />}
-            variant="contained"
-            sx={{ background: "#6B73E8" }}
+        {course.courseDetails && isEnrolled && (
+          <Box mt={3}>
+            <Typography variant="subtitle1" color="textSecondary">
+              Course Details:
+            </Typography>
+            <Typography variant="body1" paragraph>
+              {course.courseDetails}
+            </Typography>
+          </Box>
+        )}
+
+        {!isEnrolled && (
+          <Box
+            width="100%"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            py={2}
           >
-            Enrol
-          </Button>
-        </Box>
+            <Button
+              startIcon={<AddIcon />}
+              variant="contained"
+              sx={{ background: "#6B73E8" }}
+              onClick={handleEnroll}
+            >
+              Enroll
+            </Button>
+          </Box>
+        )}
       </Paper>
     </Box>
   );

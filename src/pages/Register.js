@@ -54,10 +54,10 @@ const Register = () => {
   return (
     <div className="register-page">
       <header className="header">
-        <a href="/" className="brand">MineByte</a>
+        <a href="https://kswork2001.github.io/minebyte" className="brand">MineByte</a>
         <nav className="nav-links">
-          <Link to="/about">About</Link>
-          <Link to="/contact">Contact</Link>
+          <Link to="https://kswork2001.github.io/minebyte-about">About</Link>
+          <Link to="https://kswork2001.github.io/minebyte-contact">Contact</Link>
         </nav>
       </header>
 

@@ -1,4 +1,3 @@
-// AddCourse.js
 import React, { useState } from "react";
 import {
   Box,
@@ -7,13 +6,16 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
-import { addDoc, collection, db } from "../firebase/firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
 const AddCourse = () => {
   const [courseName, setCourseName] = useState("");
   const [learningHours, setLearningHours] = useState("");
   const [description, setDescription] = useState("");
   const [isFree, setIsFree] = useState(false);
+  const [videoLink, setVideoLink] = useState("");
+  const [courseDetails, setCourseDetails] = useState("");
 
   // Save course to Firebase
   const handleSave = async () => {
@@ -23,6 +25,8 @@ const AddCourse = () => {
         learningHours,
         description,
         isFree,
+        videoLink,
+        courseDetails,
       };
 
       // Add course to 'courses' collection in Firebase
@@ -34,6 +38,8 @@ const AddCourse = () => {
       setLearningHours("");
       setDescription("");
       setIsFree(false);
+      setVideoLink("");
+      setCourseDetails("");
     } catch (error) {
       console.error("Error adding course: ", error);
     }
@@ -44,7 +50,7 @@ const AddCourse = () => {
       display="flex"
       justifyContent="center"
       alignItems="center"
-      minHeight="100vh" // Full viewport height
+      minHeight="100vh"
     >
       <Box
         component="form"
@@ -53,7 +59,7 @@ const AddCourse = () => {
         gap={2}
         p={2}
         maxWidth={400}
-        width="100%" // Make it responsive on smaller screens
+        width="100%"
       >
         <TextField
           label="Course Name"
@@ -77,6 +83,21 @@ const AddCourse = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           required
+        />
+        <TextField
+          label="YouTube Video Link"
+          variant="outlined"
+          value={videoLink}
+          onChange={(e) => setVideoLink(e.target.value)}
+          helperText="Enter the YouTube embed link"
+        />
+        <TextField
+          label="Course Details"
+          variant="outlined"
+          multiline
+          rows={6}
+          value={courseDetails}
+          onChange={(e) => setCourseDetails(e.target.value)}
         />
         <FormControlLabel
           control={

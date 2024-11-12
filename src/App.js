@@ -16,6 +16,8 @@ import Register from "./pages/Register";
 import Cookies from "js-cookie"; // Import js-cookie
 import { auth } from "./firebase/firebaseConfig"; // Firebase auth
 import { getFirestore, doc, getDoc } from "firebase/firestore"; // Firestore
+import AddCourse from "./pages/AddCourse";
+import CourseDetails from "./pages/CourseDetails";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -77,42 +79,39 @@ const App = () => {
   }
 
   return (
-      <Router>
+    <Router>
+      {isLoggedIn ? (
+        <Layout username={username}>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <MainPage
+                  username={username}
+                  firstName={firstName}
+                  lastName={lastName}
+                />
+              }
+            />
+            <Route path="/courses" element={<CourseSelection />} />
+            <Route path={`/course/:courseName`} element={<CourseDetails />} />
+            <Route path="/test-your-skills" element={<TestYourSkills />} />
+            <Route path="/accomplishments" element={<Accomplishments />} />
+            <Route path="/quizlet" element={<QuizletPage />} />
+            <Route path="/add-course" element={<AddCourse />} />
+          </Routes>
+        </Layout>
+      ) : (
         <Routes>
-          {/* Public routes */}
-          <Route path="/About" element={<About />} />
-          <Route path="/Contact" element={<Contact />} />
-
-          {/* Protected routes that require login */}
-          {isLoggedIn ? (
-              <>
-                <Route element={<Layout username={username} />}>
-                  <Route
-                      path="/"
-                      element={
-                        <MainPage
-                            username={username}
-                            firstName={firstName}
-                            lastName={lastName}
-                        />
-                      }
-                  />
-                  <Route path="/courses" element={<CourseSelection />} />
-                  <Route path="/test-your-skills" element={<TestYourSkills />} />
-                  <Route path="/accomplishments" element={<Accomplishments />} />
-                  <Route path="/quizlet" element={<QuizletPage />} />
-                </Route>
-              </>
-          ) : (
-              <>
-                <Route path="/" element={<Login onLogin={handleLogin} />} />
-                <Route path="/register" element={<Register onLogin={handleLogin} />} />
-                <Route path="*" element={<Navigate to="/" />} />
-              </>
-          )}
+          <Route path="/" element={<Login onLogin={handleLogin} />} />
+          <Route
+            path="/register"
+            element={<Register onLogin={handleLogin} />}
+          />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-      </Router>
-
+      )}
+    </Router>
   );
 };
 
